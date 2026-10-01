@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DummyFRP</string>
+    <string name="set_account_frp">Set account FRP</string>
+    <string name="set_frp">Set FRP</string>
+    <string name="set_organization_name">Set organization name</string>
+    <string name="org_name_success">Organization name set to %1$s</string>
+    <string name="org_name_failed">%1$s</string>
+    <string name="frp_account_success">name: %1$s\nemail: %2$s\nfrpToken: %3$s</string>
+    <string name="frp_account_failed">%1$s</string>
+    <string name="frp_set_success">Factory reset protection was set</string>
+    <string name="frp_set_failed">%1$s</string>
+    <string name="frp_token_missing">Set account FRP first so a token is available</string>
+    <string name="device_owner_yes">This app is device owner</string>
+    <string name="device_owner_no">This app is not device owner</string>
+    <!-- Google Cloud Console OAuth 2.0 Web client ID. Pass to addFRPAccount as serverClientId. -->
+    <string name="default_web_client_id" translatable="false">717947247407-eq80gek6kdg39boa5cgmarau9p6hhdkm.apps.googleusercontent.com</string>
+</resources>

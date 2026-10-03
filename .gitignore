@@ -23,7 +23,7 @@ captures/
 .navigation/
 output.json
 
-# Duplicate local AAR copy (JitPack uses repo/)
+# Duplicate local AAR copy
 /dist/
 
 # Logs / crash dumps
@@ -31,7 +31,7 @@ output.json
 *.hprof
 hs_err_pid*
 
-# Signing (never publish keys)
+# Signing
 *.jks
 *.keystore
 *.p12
@@ -42,6 +42,4 @@ google-services.json
 *~
 .vscode/
 
-# Keep the published AAR + POM in /repo (current version only).
-# Keep :provisioner-jatt source.
 /provisioner-jatt-frp

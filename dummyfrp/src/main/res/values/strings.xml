@@ -14,5 +14,5 @@
     <string name="device_owner_yes">This app is device owner</string>
     <string name="device_owner_no">This app is not device owner</string>
     <!-- Google Cloud Console OAuth 2.0 Web client ID. Pass to addFRPAccount as serverClientId. -->
-    <string name="default_web_client_id" translatable="false">717947247407-eq80gek6kdg39boa5cgmarau9p6hhdkm.apps.googleusercontent.com</string>
+    <string name="default_web_client_id" translatable="false"></string>
 </resources>

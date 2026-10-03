@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <img alt="v1.2.1" src="https://img.shields.io/badge/version-v1.2.1-FF8A00?style=for-the-badge&labelColor=000000"/>
+  <img alt="v1.2.2" src="https://img.shields.io/badge/version-v1.2.2-FF8A00?style=for-the-badge&labelColor=000000"/>
   <img alt="Min SDK 26" src="https://img.shields.io/badge/minSdk-26-FFCC00?style=for-the-badge&labelColor=000000"/>
   <img alt="Gradle 8.13+" src="https://img.shields.io/badge/Gradle-8.13%2B-FF8A00?style=for-the-badge&labelColor=000000"/>
   <img alt="JitPack" src="https://img.shields.io/badge/distribute-JitPack%20AAR%20%2B%20POM-white?style=for-the-badge&labelColor=000000"/>
@@ -50,6 +50,12 @@ flowchart LR
 Every snippet is **Kotlin**, then **Java**. The sliding tab matches the block under it.
 
 ## Changelog
+
+### v1.2.2
+
+Same version as the full Provisioner Jatt SDK.
+
+Use `implementation("com.github.jatinsinghsatija:Provisioner-Jatt-FRP-SDK:v1.2.2")`.
 
 ### v1.2.1
 
@@ -121,7 +127,7 @@ android {
 }
 
 dependencies {
-    implementation("com.github.jatinsinghsatija:Provisioner-Jatt-FRP-SDK:v1.2.1")
+    implementation("com.github.jatinsinghsatija:Provisioner-Jatt-FRP-SDK:v1.2.2")
 }
 ```
 
@@ -139,7 +145,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.jatinsinghsatija:Provisioner-Jatt-FRP-SDK:v1.2.1'
+    implementation 'com.github.jatinsinghsatija:Provisioner-Jatt-FRP-SDK:v1.2.2'
 }
 ```
 
@@ -335,7 +341,7 @@ FrpSetResult org = ProvisionerJattFrp.setOrganizationName("Acme");
 ## Host checklist
 
 - [ ] `minSdk` 26+ · Gradle 8.13+
-- [ ] JitPack `implementation("com.github.jatinsinghsatija:Provisioner-Jatt-FRP-SDK:v1.2.1")` — one line, POM included
+- [ ] JitPack `implementation("com.github.jatinsinghsatija:Provisioner-Jatt-FRP-SDK:v1.2.2")` — one line, POM included
 - [ ] `google()`, `mavenCentral()`, `jitpack.io`
 - [ ] `Application` registered, `initialize` in `onCreate`
 - [ ] Google OAuth **web** client ID: pass `serverClientId` to `addFRPAccount` (not to `initialize`). See **Get a Web client ID**
@@ -373,5 +379,5 @@ Do not use the **Android** OAuth client ID for `serverClientId`.
 <p align="center">
   <img src="docs/readme/logo_provisioner.png" alt="Provisioner Jatt FRP" width="96"/>
   <br/>
-  <sub>Provisioner Jatt FRP SDK · v1.2.1 · <code>com.beastblocks.provisionerjattsdkfrp</code></sub>
+  <sub>Provisioner Jatt FRP SDK · v1.2.2 · <code>com.beastblocks.provisionerjattsdkfrp</code></sub>
 </p>

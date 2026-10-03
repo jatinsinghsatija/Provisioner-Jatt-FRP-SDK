@@ -11,7 +11,7 @@ android {
         minSdk = 26
         targetSdk = 36
         versionCode = 5
-        versionName = "1.2.1"
+        versionName = "1.2.2"
     }
     buildTypes {
         release {
@@ -26,6 +26,6 @@ android {
 }
 
 dependencies {
-    implementation("com.beastblocks:provisioner-jatt-frp:1.2.1")
+    implementation("com.beastblocks:provisioner-jatt-frp:1.2.2")
     implementation("androidx.activity:activity:1.8.0")
 }

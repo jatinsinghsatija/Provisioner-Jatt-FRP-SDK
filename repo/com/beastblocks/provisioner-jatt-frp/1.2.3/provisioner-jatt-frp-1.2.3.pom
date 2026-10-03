@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.beastblocks</groupId>
   <artifactId>provisioner-jatt-frp</artifactId>
-  <version>1.2.2</version>
+  <version>1.2.3</version>
   <packaging>aar</packaging>
   <name>Provisioner Jatt FRP SDK</name>
   <description>Factory Reset Protection and organization-name SDK</description>

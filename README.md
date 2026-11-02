@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <img alt="v1.2.3" src="https://img.shields.io/badge/version-v1.2.3-FF8A00?style=for-the-badge&labelColor=000000"/>
+  <img alt="v1.3.0" src="https://img.shields.io/badge/version-v1.3.0-FF8A00?style=for-the-badge&labelColor=000000"/>
   <img alt="Min SDK 26" src="https://img.shields.io/badge/minSdk-26-FFCC00?style=for-the-badge&labelColor=000000"/>
   <img alt="Gradle 8.13+" src="https://img.shields.io/badge/Gradle-8.13%2B-FF8A00?style=for-the-badge&labelColor=000000"/>
   <img alt="JitPack" src="https://img.shields.io/badge/distribute-JitPack%20AAR%20%2B%20POM-white?style=for-the-badge&labelColor=000000"/>
@@ -19,6 +19,8 @@
   Sign in a Google account. Apply factory reset protection.<br/>
   Set the lock-screen organization name. The host app keeps every Activity.
 </p>
+
+> **Note:** Older versions will be deactivated soon as the SDK is now commercialised, so upgrade to 1.3.0 to avoid deactivation. To get lifetime full access, contact [beastblockstechnologies@gmail.com](mailto:beastblockstechnologies@gmail.com).
 
 ---
 
@@ -48,30 +50,6 @@ flowchart LR
 ```
 
 Every snippet is **Kotlin**, then **Java**. The sliding tab matches the block under it.
-
-## Changelog
-
-### v1.2.3
-
-Published artifact is 1.2.3 (`com.beastblocks:provisioner-jatt-frp`).
-
-### v1.2.2
-
-Same version as the full Provisioner Jatt SDK.
-
-Use `implementation("com.github.jatinsinghsatija:Provisioner-Jatt-FRP-SDK:v1.2.2")`.
-
-### v1.2.1
-
-Same version as the full Provisioner Jatt SDK.
-
-- **`initialize`.** Starts the SDK and records the host **package name** for access the same way as the full SDK. Does not open UI by itself. Does not take a Google client ID.
-- **FRP.** `ProvisionerJattFrp.addFRPAccount` runs Google’s current account chooser (Credential Manager) on the **calling host activity** (no SDK activity). Pass the OAuth **web client ID** as `serverClientId` on that call — not on `initialize`. After success the SDK returns `name`, `email`, and `frpToken`. `setFRP(token)` requires this app to be device owner and applies factory reset protection. Optional `ProvisionerJattFrp.setOrganizationName(orgName)` is a separate call on **that class only** (not on `ProvisionerJatt`): it internally checks that this host app is device owner, then writes the lock-screen organization name. Failures include a specific `reason`.
-- **`isDeviceOwner()`.** Checks whether the integrating app is device owner of **this** device.
-
-Use `implementation("com.github.jatinsinghsatija:Provisioner-Jatt-FRP-SDK:v1.2.1")`.
-
----
 
 # Implementation
 
@@ -131,7 +109,7 @@ android {
 }
 
 dependencies {
-    implementation("com.github.jatinsinghsatija:Provisioner-Jatt-FRP-SDK:v1.2.3")
+    implementation("com.github.jatinsinghsatija:Provisioner-Jatt-FRP-SDK:v1.3.0")
 }
 ```
 
@@ -149,7 +127,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.jatinsinghsatija:Provisioner-Jatt-FRP-SDK:v1.2.3'
+    implementation 'com.github.jatinsinghsatija:Provisioner-Jatt-FRP-SDK:v1.3.0'
 }
 ```
 
@@ -161,7 +139,7 @@ The sample app is **DummyFRP** (`:dummyfrp`, applicationId `com.beastblocks.prov
 
 ## Initialize in `Application`
 
-`initialize` starts the SDK and records the host package name for access. It does **not** open the Google chooser or write device-owner policy until you call `addFRPAccount`, `setFRP`, or `setOrganizationName`. Pass the Google OAuth **web** client ID to `addFRPAccount`, not here.
+`initialize` starts the SDK. It does **not** open the Google chooser or write device-owner policy until you call `addFRPAccount`, `setFRP`, or `setOrganizationName`. Pass the Google OAuth **web** client ID to `addFRPAccount`, not here.
 
 Register the `Application` class in the manifest. `ProvisionerJatt.initialize(this)` is the full initialize call.
 
@@ -263,13 +241,13 @@ FrpSetResult orgApplied = ProvisionerJattFrp.setOrganizationName("Acme");
 | Result | When |
 | --- | --- |
 | Returns `true` | This app is device owner of this device |
-| Returns `false` | This app is not device owner, `initialize` has not run and no `Context` was passed, or the SDK is not licensed |
+| Returns `false` | This app is not device owner, or `initialize` has not run and no `Context` was passed |
 
 ### `addFRPAccount` / `setFRP` / `setOrganizationName` — factory reset protection
 
 **Use when:** you need a Google-account FRP token from the integrating app, then later apply that token on a **device-owner** app. Optionally set the lock-screen organization name on that same device-owner app.
 
-**How:** `addFRPAccount(activity, callback, serverClientId)` runs Google’s current account chooser **on that same host activity**. There is no extra SDK activity. The chooser is Credential Manager (`GetGoogleIdOption`), which shows the host app identity from that OAuth client. The **web client ID** is required on this call (`serverClientId`). Do not pass it to `initialize`. See **Get a Web client ID**. On success the SDK returns `name`, `email`, and `frpToken`, then clears the Credential Manager sign-in state. `setFRP(token)` runs on this device: if the app is not device owner it fails; otherwise it applies factory reset protection from that token. Optional `setOrganizationName(orgName)` is a **separate** call (it is not part of add/set FRP). It internally checks that **this host app** is device owner of this device, then writes the lock-screen organization name. Blank `orgName` clears it. Pass a `Context` when `initialize` has not run.
+**How:** `addFRPAccount(activity, callback, serverClientId)` runs Google’s current account chooser **on that same host activity**. There is no extra SDK activity. The chooser is Credential Manager (`GetGoogleIdOption`), which shows the host app identity from that OAuth client. The **web client ID** is required on this call (`serverClientId`). Do not pass it to `initialize`. See **Web client ID**. On success the SDK returns `name`, `email`, and `frpToken`, then clears the Credential Manager sign-in state. `setFRP(token)` runs on this device: if the app is not device owner it fails; otherwise it applies factory reset protection from that token. Optional `setOrganizationName(orgName)` is a **separate** call (it is not part of add/set FRP). It internally checks that **this host app** is device owner of this device, then writes the lock-screen organization name. Blank `orgName` clears it. Pass a `Context` when `initialize` has not run.
 
 **What happens:** only `addFRPAccount`, `setFRP`, and `setOrganizationName` are public on `ProvisionerJattFrp`. Failures return `success = false` with a specific `reason` (cancelled sign-in, Play services missing, not device owner, invalid token, and so on).
 
@@ -345,10 +323,10 @@ FrpSetResult org = ProvisionerJattFrp.setOrganizationName("Acme");
 ## Host checklist
 
 - [ ] `minSdk` 26+ · Gradle 8.13+
-- [ ] JitPack `implementation("com.github.jatinsinghsatija:Provisioner-Jatt-FRP-SDK:v1.2.3")` — one line, POM included
+- [ ] JitPack `implementation("com.github.jatinsinghsatija:Provisioner-Jatt-FRP-SDK:v1.3.0")` — one line, POM included
 - [ ] `google()`, `mavenCentral()`, `jitpack.io`
 - [ ] `Application` registered, `initialize` in `onCreate`
-- [ ] Google OAuth **web** client ID: pass `serverClientId` to `addFRPAccount` (not to `initialize`). See **Get a Web client ID**
+- [ ] Google OAuth **web** client ID: pass `serverClientId` to `addFRPAccount` (not to `initialize`). See **Web client ID**
 - [ ] `addFRPAccount` from a host `ComponentActivity`
 - [ ] `setFRP(token)` / `setOrganizationName(orgName)` only when this app is device owner of this device
 - [ ] Play services available on the device for the Google account chooser
@@ -365,16 +343,9 @@ Need USB + wireless ADB provisioning, QR / pair-code overlays, DPC automation, a
 
 ---
 
-# Get a Web client ID
+# Web client ID
 
-`addFRPAccount` needs a Google OAuth **Web** client ID as `serverClientId`. That is not an Android client ID, and it is not passed to `initialize`. Create it in Firebase:
-
-1. Open the [Firebase Console](https://console.firebase.google.com/) and sign in.
-2. Create a Firebase project, or open the project that will serve this host app.
-3. Open **Project settings** (gear) → **Your apps**. Add an **Android** app if one is not listed. The Android package name must match the host `applicationId`. Add the app’s **SHA-1** and **SHA-256** from the debug and release signing certificates so Google Sign-In can run on a device.
-4. Open **Authentication** → **Sign-in method**. Enable **Google** and save.
-5. On the Google provider page, copy the **Web client ID**. It ends with `.apps.googleusercontent.com`. You can also find it under **Project settings** → **General**.
-6. Pass that string as the last argument of `ProvisionerJattFrp.addFRPAccount`. Hosts often keep it in a string resource and pass `getString(R.string.default_web_client_id)`.
+`addFRPAccount` needs a Google OAuth **Web** client ID as `serverClientId`. That is not an Android client ID, and it is not passed to `initialize`. Pass that string as the last argument of `ProvisionerJattFrp.addFRPAccount`. Hosts often keep it in a string resource and pass `getString(R.string.default_web_client_id)`.
 
 Do not use the **Android** OAuth client ID for `serverClientId`.
 
@@ -383,5 +354,5 @@ Do not use the **Android** OAuth client ID for `serverClientId`.
 <p align="center">
   <img src="docs/readme/logo_provisioner.png" alt="Provisioner Jatt FRP" width="96"/>
   <br/>
-  <sub>Provisioner Jatt FRP SDK · v1.2.3 · <code>com.beastblocks.provisionerjattsdkfrp</code></sub>
+  <sub>Provisioner Jatt FRP SDK · v1.3.0 · <code>com.beastblocks.provisionerjattsdkfrp</code></sub>
 </p>

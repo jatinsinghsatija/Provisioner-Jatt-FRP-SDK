@@ -50,7 +50,7 @@ public class StartActivity extends ComponentActivity {
                 );
             }
             runOnUiThread(() -> {
-                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+                if (!licenseNotice(message)) Toast.makeText(this, message, Toast.LENGTH_LONG).show();
                 refreshDeviceOwner();
             });
         }, getString(R.string.default_web_client_id));
@@ -65,7 +65,7 @@ public class StartActivity extends ComponentActivity {
         String message = result.getSuccess()
             ? getString(R.string.frp_set_success)
             : getString(R.string.frp_set_failed, result.getReason() == null ? "" : result.getReason());
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        if (!licenseNotice(message)) Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         refreshDeviceOwner();
     }
 
@@ -81,7 +81,14 @@ public class StartActivity extends ComponentActivity {
                 result.getReason() == null ? "" : result.getReason()
             );
         }
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        if (!licenseNotice(message)) Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         refreshDeviceOwner();
+    }
+
+    private boolean licenseNotice(String message) {
+        return message == null
+            || message.isEmpty()
+            || "SDK is not available".equals(message)
+            || "Debug trials has been finished for today and will continue tomorrow".equals(message);
     }
 }
